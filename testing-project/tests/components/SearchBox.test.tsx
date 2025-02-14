@@ -31,10 +31,10 @@ describe("SearchBox", () => {
     expect(onChange).toHaveBeenCalledWith(searchTerm);
   });
 
-  it("should not call onChange if input field is empty", () => {
+  it("should not call onChange if input field is empty", async () => {
     const { input, onChange, user } = renderSearchBox();
 
-    user.type(input, "{enter}");
+    await user.type(input, "{enter}");
 
     expect(onChange).not.toHaveBeenCalled();
   });

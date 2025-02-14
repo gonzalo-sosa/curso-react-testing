@@ -12,7 +12,7 @@ describe("BrowseProductsPage", () => {
   const renderBrowseProducts = () =>
     render(<BrowseProducts />, { wrapper: AllProviders });
 
-  it("should show a loading skeleton when fetching categories", async () => {
+  it("should show a loading skeleton when fetching categories", () => {
     server.use(
       http.get("/categories", async () => {
         await delay();
@@ -35,7 +35,7 @@ describe("BrowseProductsPage", () => {
     );
   });
 
-  it("should show a loading skeleton when fetching products", async () => {
+  it("should show a loading skeleton when fetching products", () => {
     server.use(
       http.get("/products", async () => {
         await delay();

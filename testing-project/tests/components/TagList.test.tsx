@@ -1,5 +1,5 @@
 import TagList from "@/components/TagList";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 describe("TagList", () => {
   it("should render a list of tags", async () => {
@@ -10,7 +10,7 @@ describe("TagList", () => {
     //   expect(listItems.length).toBeGreaterThan(0);
     // });
 
-    screen.findAllByRole("listitem").then((listItems) => {
+    await screen.findAllByRole("listitem").then((listItems) => {
       expect(listItems.length).toBeGreaterThan(0);
     });
   });
