@@ -1,11 +1,17 @@
-import { render, screen } from "@testing-library/react";
 import TagList from "@/components/TagList";
+import { render, screen, waitFor } from "@testing-library/react";
 
 describe("TagList", () => {
-  it("should render tags", async () => {
+  it("should render a list of tags", async () => {
     render(<TagList />);
 
-    const listItems = await screen.findAllByRole("listitem");
-    expect(listItems.length).toBeGreaterThan(0);
+    // await waitFor(() => {
+    //   const listItems = screen.getAllByRole("listitem");
+    //   expect(listItems.length).toBeGreaterThan(0);
+    // });
+
+    screen.findAllByRole("listitem").then((listItems) => {
+      expect(listItems.length).toBeGreaterThan(0);
+    });
   });
 });

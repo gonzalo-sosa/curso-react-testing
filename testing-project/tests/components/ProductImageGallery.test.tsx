@@ -1,21 +1,30 @@
-import { render, screen } from '@testing-library/react';
-import ProductImageGallery from '@/components/ProductImageGallery';
+import ProductImageGallery from "@/components/ProductImageGallery";
+import { render, screen } from "@testing-library/react";
 
-describe('ProductImageGallery', () => {
-  it('should render nothing if given an empty array', () => {
+describe("ProductImageGallery", () => {
+  const imageUrls: string[] = [
+    "https://via.placeholder.com/150",
+    "https://via.placeholder.com/160",
+    "https://via.placeholder.com/170",
+  ];
+
+  it("should not render anything if imageUrls array is empty", () => {
     const { container } = render(<ProductImageGallery imageUrls={[]} />);
+
     expect(container).toBeEmptyDOMElement();
   });
 
-  it('should render a list of images', () => {
-    const imageUrls = ['url1', 'url2'];
-
+  it("should render a list of images", () => {
     render(<ProductImageGallery imageUrls={imageUrls} />);
 
-    const images = screen.getAllByRole('img');
-    expect(images).toHaveLength(2);
-    imageUrls.forEach((url, index) => {
-      expect(images[index]).toHaveAttribute('src', url);
-    })
-  })
-})
+    const list = screen.getByRole("list");
+    const images = screen.getAllByRole("img");
+
+    expect(list).toBeInTheDocument();
+    expect(images).toHaveLength(imageUrls.length);
+    images.forEach((image, index) => {
+      expect(image).toBeInTheDocument();
+      expect(image).toHaveAttribute("src", imageUrls[index]);
+    });
+  });
+});

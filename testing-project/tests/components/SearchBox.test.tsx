@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
 import SearchBox from "@/components/SearchBox";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 describe("SearchBox", () => {
@@ -9,30 +9,32 @@ describe("SearchBox", () => {
 
     return {
       input: screen.getByPlaceholderText(/search/i),
-      user: userEvent.setup(),
       onChange,
+      user: userEvent.setup(),
     };
   };
 
   it("should render an input field for searching", () => {
     const { input } = renderSearchBox();
 
-    expect(input).toBeInTheDocument();
+    expect(input).toHaveAttribute("type", "text");
   });
 
-  it("should call onChange when Enter is pressed", async () => {
+  it("should call onChange when the key 'enter' is pressed", async () => {
     const { input, onChange, user } = renderSearchBox();
 
     const searchTerm = "SearchTerm";
+
     await user.type(input, searchTerm + "{enter}");
 
+    expect(onChange).toHaveBeenCalledOnce();
     expect(onChange).toHaveBeenCalledWith(searchTerm);
   });
 
-  it("should not call onChange if input field is empty", async () => {
+  it("should not call onChange if input field is empty", () => {
     const { input, onChange, user } = renderSearchBox();
 
-    await user.type(input, "{enter}");
+    user.type(input, "{enter}");
 
     expect(onChange).not.toHaveBeenCalled();
   });

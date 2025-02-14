@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
 import TermsAndConditions from "@/components/TermsAndConditions";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 describe("TermsAndConditions", () => {
@@ -13,7 +13,7 @@ describe("TermsAndConditions", () => {
     };
   };
 
-  it("should render with correct text and initial state", () => {
+  it("should render correct text and initial state", () => {
     const { heading, checkbox, button } = renderComponent();
 
     expect(heading).toHaveTextContent("Terms & Conditions");
