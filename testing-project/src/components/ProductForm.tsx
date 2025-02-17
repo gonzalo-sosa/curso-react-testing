@@ -22,6 +22,7 @@ const ProductForm = ({ product, onSubmit }: Props) => {
 
   const {
     register,
+    reset,
     handleSubmit,
     control,
     formState: { errors },
@@ -49,7 +50,12 @@ const ProductForm = ({ product, onSubmit }: Props) => {
     >
       <Box>
         <TextField.Root className="max-w-sm">
-          <TextField.Input autoFocus placeholder="Name" {...register("name")} size="3" />
+          <TextField.Input
+            autoFocus
+            placeholder="Name"
+            {...register("name")}
+            size="3"
+          />
         </TextField.Root>
         <ErrorMessage error={errors.name} />
       </Box>
@@ -95,6 +101,14 @@ const ProductForm = ({ product, onSubmit }: Props) => {
       </Box>
       <Button size="3" disabled={isSubmitting}>
         Submit
+      </Button>
+      <Button
+        size="3"
+        type="reset"
+        disabled={isSubmitting}
+        onClick={() => reset()}
+      >
+        Reset
       </Button>
     </form>
   );

@@ -2,7 +2,11 @@ import * as z from "zod";
 
 export const productFormSchema = z.object({
   id: z.number().optional(),
-  name: z.string().min(1, "Name is required").max(255),
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .max(255)
+    .regex(/[A-Za-z]/, { message: "Invalid name" }),
   price: z.coerce
     .number({
       required_error: "Price is required",
